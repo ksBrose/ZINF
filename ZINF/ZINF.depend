@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1691463633 source:c:\users\kelvin-pc\projectsgit\zinf\main.c
+	<stdio.h>
+	<stdlib.h>
+	"raylib.h"
+	"menu.h"
+
+1691463564 c:\users\kelvin-pc\projectsgit\zinf\menu.c
+	"menu.h"
+
+1691463662 source:c:\users\kelvin-pc\projectsgit\zinf\menu.c
+	"menu.h"
+
+1691463658 c:\users\kelvin-pc\projectsgit\zinf\menu.h
+	"raylib.h"
+
