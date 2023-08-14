@@ -186,7 +186,7 @@ void le_nivel(Textures *textures, Infos *settings, char mapaJogo[][24])
     FILE *arq_nivel;
     char caractere, arq_nome[30];
 
-    sprintf(arq_nome, "nivel%d.txt", settings->currentLevel); // retorna uma string nivel(x).txt na variavel arq_nivel onde x é o nivel atual
+    sprintf(arq_nome, "nivel%d.txt", settings->currentLevel); // retorna uma string nivel(x).txt na variavel arq_nivel onde x Ã© o nivel atual
 
     arq_nivel = fopen(arq_nome, "r");
 
@@ -215,8 +215,8 @@ void inicializa_pos_jogador(Character *player, Infos *settings, char mapaJogo[][
         {
             if (mapaJogo[i][j] == 'J')
             {
-                player->posXinicial = (j*50) + settings->gameArea.x; // coluna*50pixel(tamanho da sprite) + posição x ocupada pelo jogo na tela
-                player->posYinicial = (i*50) + settings->gameArea.y; // linhaa*50pixel(tamanho da sprite) + posição y ocupada pelo jogo na tela
+                player->posXinicial = (j*50) + settings->gameArea.x; // coluna*50pixel(tamanho da sprite) + posiÃ§Ã£o x ocupada pelo jogo na tela
+                player->posYinicial = (i*50) + settings->gameArea.y; // linhaa*50pixel(tamanho da sprite) + posiÃ§Ã£o y ocupada pelo jogo na tela
             }
         }
     }
@@ -234,8 +234,8 @@ void inicializa_pos_inimigo(Character enemy[], Infos *settings, char mapaJogo[][
         {
             if (mapaJogo[i][j] == 'M')
             {
-                enemy[inimigo].posXinicial = (j*50) + settings->gameArea.x; // coluna*50pixel(tamanho da sprite) + posição x ocupada pelo jogo na tela
-                enemy[inimigo].posYinicial = (i*50) + settings->gameArea.y; // linhaa*50pixel(tamanho da sprite) + posição y ocupada pelo jogo na tela
+                enemy[inimigo].posXinicial = (j*50) + settings->gameArea.x; // coluna*50pixel(tamanho da sprite) + posiÃ§Ã£o x ocupada pelo jogo na tela
+                enemy[inimigo].posYinicial = (i*50) + settings->gameArea.y; // linhaa*50pixel(tamanho da sprite) + posiÃ§Ã£o y ocupada pelo jogo na tela
                 inimigo++;
             }
         }
@@ -248,8 +248,8 @@ void inicializa_jogador(Character *player, Textures *sprites)
 {
     player->width = sprites->player_front.width;
     player->height = sprites->player_front.height;
-    player->posXatual = player->posXinicial; // pos inicial já inicializa
-    player->posYatual = player->posYinicial; // pos inicial já inicializa
+    player->posXatual = player->posXinicial; // pos inicial jÃ¡ inicializa
+    player->posYatual = player->posYinicial; // pos inicial jÃ¡ inicializa
 
     player->direction = sprites->player_front;
     player->rotacao = 0;
@@ -276,8 +276,8 @@ void inicializa_inimigo(Character enemy[], Textures *sprites)
     {
         enemy[inimigo].width = sprites->enemy_front.width;
         enemy[inimigo].height = sprites->enemy_front.height;
-        enemy[inimigo].posXatual = enemy[inimigo].posXinicial; // pos inicial já inicializa
-        enemy[inimigo].posYatual = enemy[inimigo].posYinicial; // pos inicial já inicializa
+        enemy[inimigo].posXatual = enemy[inimigo].posXinicial; // pos inicial jÃ¡ inicializa
+        enemy[inimigo].posYatual = enemy[inimigo].posYinicial; // pos inicial jÃ¡ inicializa
 
         enemy[inimigo].direction = sprites->enemy_front;
         enemy[inimigo].rotacao = 0;
