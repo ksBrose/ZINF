@@ -189,7 +189,7 @@ void le_nivel(Textures *textures, Infos *settings, char mapaJogo[][COLUNAS])
     FILE *arq_nivel;
     char caractere, arq_nome[30];
 
-    sprintf(arq_nome, "nivel%d.txt", settings->currentLevel); // retorna uma string nivel(x).txt na variavel arq_nivel onde x é o nivel atual
+    sprintf(arq_nome, "nivel%d.txt", settings->currentLevel); // retorna uma string nivel(x).txt na variavel arq_nivel onde x Ã© o nivel atual
 
     arq_nivel = fopen(arq_nome, "r");
 
@@ -218,8 +218,8 @@ void inicializa_pos_jogador(Character *player, Infos *settings, char mapaJogo[][
         {
             if (mapaJogo[i][j] == 'J')
             {
-                player->posXinicial = (j*50) + settings->gameArea.x; // coluna*50pixel(tamanho da sprite) + posição x ocupada pelo jogo na tela
-                player->posYinicial = (i*50) + settings->gameArea.y; // linhaa*50pixel(tamanho da sprite) + posição y ocupada pelo jogo na tela
+                player->posXinicial = (j*50) + settings->gameArea.x; // coluna*50pixel(tamanho da sprite) + posiÃ§Ã£o x ocupada pelo jogo na tela
+                player->posYinicial = (i*50) + settings->gameArea.y; // linhaa*50pixel(tamanho da sprite) + posiÃ§Ã£o y ocupada pelo jogo na tela
             }
         }
     }
@@ -237,8 +237,8 @@ void inicializa_pos_inimigo(Character enemy[], Infos *settings, char mapaJogo[][
         {
             if (mapaJogo[i][j] == 'M')
             {
-                enemy[inimigo].posXinicial = (j*50) + settings->gameArea.x; // coluna*50pixel(tamanho da sprite) + posição x ocupada pelo jogo na tela
-                enemy[inimigo].posYinicial = (i*50) + settings->gameArea.y; // linhaa*50pixel(tamanho da sprite) + posição y ocupada pelo jogo na tela
+                enemy[inimigo].posXinicial = (j*50) + settings->gameArea.x; // coluna*50pixel(tamanho da sprite) + posiÃ§Ã£o x ocupada pelo jogo na tela
+                enemy[inimigo].posYinicial = (i*50) + settings->gameArea.y; // linhaa*50pixel(tamanho da sprite) + posiÃ§Ã£o y ocupada pelo jogo na tela
                 inimigo++;
             }
         }
@@ -251,8 +251,8 @@ void inicializa_jogador(Character *player, Textures *sprites)
 {
     player->width = sprites->player_down.width;
     player->height = sprites->player_down.height;
-    player->posXatual = player->posXinicial; // pos inicial já inicializa
-    player->posYatual = player->posYinicial; // pos inicial já inicializa
+    player->posXatual = player->posXinicial; // pos inicial jÃ¡ inicializa
+    player->posYatual = player->posYinicial; // pos inicial jÃ¡ inicializa
 
     player->direction = sprites->player_down;
     player->rotacao = 'S';
@@ -279,8 +279,8 @@ void inicializa_inimigo(Character enemy[], Textures *sprites)
     {
         enemy[inimigo].width = sprites->enemy_down.width;
         enemy[inimigo].height = sprites->enemy_down.height;
-        enemy[inimigo].posXatual = enemy[inimigo].posXinicial; // pos inicial já inicializa
-        enemy[inimigo].posYatual = enemy[inimigo].posYinicial; // pos inicial já inicializa
+        enemy[inimigo].posXatual = enemy[inimigo].posXinicial; // pos inicial jÃ¡ inicializa
+        enemy[inimigo].posYatual = enemy[inimigo].posYinicial; // pos inicial jÃ¡ inicializa
 
         if (inimigo%2 == 0)
         {
@@ -468,22 +468,22 @@ void checa_colisao_mapa(Character *player, char mapaJogo[][COLUNAS], Infos *sett
 {
 // Checa colisao com os limites do mapa
 
-    // WIDTH - 50 = Largura max do mapa - 50 pixel (tamanho do sprite do corpo do link), se a pos atual for maior do que isso significa que ao dar o prox mov o corpo ja ficará pra fora do mapa
+    // WIDTH - 50 = Largura max do mapa - 50 pixel (tamanho do sprite do corpo do link), se a pos atual for maior do que isso significa que ao dar o prox mov o corpo ja ficarÃ¡ pra fora do mapa
     if (player->posXatual >= WIDTH - 50)
         player->collisionRight = true;
     else if (player->posXatual < WIDTH - 50)
         player->collisionRight = false;
-    // se a pos x for menor que 5 (o espaco que o link se move a cada aperto de tecla) significa que ao dar o prox mov o corpo ficará pra fora do mapa
+    // se a pos x for menor que 5 (o espaco que o link se move a cada aperto de tecla) significa que ao dar o prox mov o corpo ficarÃ¡ pra fora do mapa
     if (player->posXatual <= 5)
         player->collisionLeft = true;
     else if (player->posXatual > 5)
         player->collisionLeft = false;
-    // se a pos y for menor que 65 (o espaco que o link se move a cada aperto de tecla + 60 de deslocamento de altura sem a barra de status) significa que ao dar o prox mov o corpo ficará pra fora do mapa
+    // se a pos y for menor que 65 (o espaco que o link se move a cada aperto de tecla + 60 de deslocamento de altura sem a barra de status) significa que ao dar o prox mov o corpo ficarÃ¡ pra fora do mapa
     if (player->posYatual <= 60 + 5)
         player->collisionUp = true;
     else if (player->posYatual > 60 + 5)
         player->collisionUp = false;
-    // HEIGHT - 50 = Altura max do mapa - 50 pixel (tamanho do sprite do corpo do link), se a pos atual for maior do que isso significa que ao dar o prox mov o corpo ja ficará pra fora do mapa
+    // HEIGHT - 50 = Altura max do mapa - 50 pixel (tamanho do sprite do corpo do link), se a pos atual for maior do que isso significa que ao dar o prox mov o corpo ja ficarÃ¡ pra fora do mapa
     if (player->posYatual >= HEIGHT - 50)
         player->collisionDown = true;
     else if (player->posYatual < HEIGHT - 50)
