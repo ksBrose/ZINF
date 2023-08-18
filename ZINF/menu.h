@@ -6,7 +6,7 @@
 #define VelRot 60
 #define Tfonte 200
 #define Mfonte 60
-#define TAMMENU 4
+#define TAMMENU 5
 #define E 20
 #define Yi 400
 
@@ -29,3 +29,5 @@ void DrawTitle();
 void DesenhaOrigem(Vector2 O);
 
 void DrawMenu(char menu [TAMMENU][15]);
+
+void ProgSelector(Triangle *T,int *select, char menu [][15]);
