@@ -31,6 +31,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Infos.h" />
+		<Unit filename="character.h" />
+		<Unit filename="espada.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -38,6 +41,11 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="menu.h" />
+		<Unit filename="scoreboard.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="scoreboard.h" />
+		<Unit filename="sprites.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

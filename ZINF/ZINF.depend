@@ -14,3 +14,90 @@
 1691463658 c:\users\kelvin-pc\projectsgit\zinf\menu.h
 	"raylib.h"
 
+1692278286 source:e:\zinf-main\zinf-main\zinf\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"raylib.h"
+	"menu.h"
+
+1692231746 e:\zinf-main\zinf-main\zinf\menu.h
+	"raylib.h"
+
+1692231746 source:e:\zinf-main\zinf-main\zinf\menu.c
+	"menu.h"
+
+1692321876 source:g:\zinf-main\zinf-main\zinf\menu.c
+	"menu.h"
+
+1692321876 g:\zinf-main\zinf-main\zinf\menu.h
+	"raylib.h"
+
+1692390958 source:g:\zinf-main\zinf-main\zinf\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"raylib.h"
+	"menu.h"
+	"scoreboard.h"
+	"character.h"
+	"sprites.h"
+	"espada.h"
+
+1692383280 g:\zinf-main\zinf-main\zinf\scoreboard.h
+	<stdio.h>
+	<string.h>
+	"raylib.h"
+
+1692383322 source:g:\zinf-main\zinf-main\zinf\scoreboard.c
+	"scoreboard.h"
+
+1692383668 g:\zinf-main\zinf-main\zinf\character.h
+	"raylib.h"
+
+1692322010 g:\zinf-main\zinf-main\zinf\sprites.h
+	"raylib.h"
+
+1692387434 g:\zinf-main\zinf-main\zinf\espada.h
+	"raylib.h"
+	"Infos.h"
+
+1692323356 g:\zinf-main\zinf-main\zinf\infos.h
+
+1692368104 source:d:\zinf-main\zinf-main\zinf\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"raylib.h"
+	"menu.h"
+	"scoreboard.h"
+	"character.h"
+	"sprites.h"
+	"espada.h"
+
+1692321876 d:\zinf-main\zinf-main\zinf\menu.h
+	"raylib.h"
+
+1692321642 d:\zinf-main\zinf-main\zinf\scoreboard.h
+	<stdio.h>
+	<string.h>
+	"raylib.h"
+
+1692321812 d:\zinf-main\zinf-main\zinf\character.h
+	"raylib.h"
+
+1692322010 d:\zinf-main\zinf-main\zinf\sprites.h
+	"raylib.h"
+
+1692323594 d:\zinf-main\zinf-main\zinf\espada.h
+	"raylib.h"
+	"Infos.h"
+
+1692323356 d:\zinf-main\zinf-main\zinf\infos.h
+
+1692321876 source:d:\zinf-main\zinf-main\zinf\menu.c
+	"menu.h"
+
+1692321644 source:d:\zinf-main\zinf-main\zinf\scoreboard.c
+	"scoreboard.h"
+
