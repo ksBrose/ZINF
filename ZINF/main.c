@@ -24,11 +24,9 @@ void inicializa_jogo(Infos *settings)
 {
 
     settings->gameArea = (Rectangle) {0, 60, WIDTH, HEIGHT};
-    settings->won = false;
     settings->closeGame = false;
     settings->currentLevel = 1;
     settings->currentState = TITLE;
-    settings->optionSelected = 0;
     settings->score = 0;
     settings->num_inimigos = 0;
     settings->num_inimigos_mortos = 0;
@@ -100,7 +98,9 @@ void le_nivel(Textures *textures, Infos *settings, char mapaJogo[][COLUNAS])
             }
         }
         fclose(arq_nivel);
-    }else {settings->currentState = GAMEOVER;}
+    }
+    else
+        settings->currentState = GAMEOVER;
 }
 
 void inicializa_pos_jogador(Character *player, Infos *settings, char mapaJogo[][COLUNAS])
@@ -198,10 +198,10 @@ void inicializa_inimigo(Character enemy[], Textures *sprites, Infos *settings)
             enemy[inimigo].rotacao = 'D';
         }
 
-
-        if(enemy[inimigo].rec.x>0 && enemy[inimigo].rec.x < WIDTH-50 && enemy[inimigo].rec.y >60 && enemy[inimigo].rec.y <HEIGHT-50 ){
-        enemy[inimigo].vidas = 1;
-        }else {enemy[inimigo].vidas = 0;}
+        if(enemy[inimigo].rec.x>=0 && enemy[inimigo].rec.x <= WIDTH-50 && enemy[inimigo].rec.y >=60 && enemy[inimigo].rec.y <=HEIGHT-50 )
+            enemy[inimigo].vidas = 1;
+        else
+            enemy[inimigo].vidas = 0;
 
         enemy[inimigo].velocidade = 2;
 
@@ -221,7 +221,7 @@ void inicializa_inimigo(Character enemy[], Textures *sprites, Infos *settings)
 
 void display_jogo(Character *player, Character enemy[], char mapaJogo[][COLUNAS], Textures *sprites, Infos *settings)
 {
-    char nivel[7], vidas[2], escore[10];
+    char nivel[7], vidas[2], escore[10], inimigos_mortos[10], inimigos[10];
     Rectangle areia, pedras;
 
     ClearBackground(BLACK);
@@ -238,6 +238,7 @@ void display_jogo(Character *player, Character enemy[], char mapaJogo[][COLUNAS]
 
     sprintf(escore, "ESCORE: %d", settings->score);
     DrawText(escore, 330, 15, 30, WHITE);
+
 
 //  Desenha chao
 
@@ -393,29 +394,21 @@ void checa_colisao_mapa(Character *player, char mapaJogo[][COLUNAS], Infos *sett
        if (player->rec.x >= WIDTH - 50)
        {
            player->collisionRight = true;
-          // player->rec.x--;
-           //player->rec.x = ceil(player->rec.x);
        }
-       // se a pos x for menor que 5 (o espaco que o link se move a cada aperto de tecla) significa que ao dar o prox mov o corpo ficará pra fora do mapa
+       // se a pos x for menor que 0 ao dar o prox mov o corpo ficará pra fora do mapa
        if (player->rec.x <= 0)
        {
            player->collisionLeft = true;
-           //player->rec.x++;
-           //player->rec.x = floor(player->rec.x);
        }
        // se a pos y for menor que 65 (o espaco que o link se move a cada aperto de tecla + 60 de deslocamento de altura sem a barra de status) significa que ao dar o prox mov o corpo ficará pra fora do mapa
        if (player->rec.y <= 60 + 0)
        {
            player->collisionUp = true;
-         //  player->rec.y++;
-       //    player->rec.y = floor(player->rec.y);
        }
        // HEIGHT - 50 = Altura max do mapa - 50 pixel (tamanho do sprite do corpo do link), se a pos atual for maior do que isso significa que ao dar o prox mov o corpo ja ficará pra fora do mapa
        if (player->rec.y >= HEIGHT - 50)
        {
            player->collisionDown = true;
-       //    player->rec.y--;
-     //      player->rec.y = ceil(player->rec.y);
        }
 
 // Checa colisao com as pedras
@@ -441,7 +434,6 @@ void checa_colisao_mapa(Character *player, char mapaJogo[][COLUNAS], Infos *sett
                     player->attackRight = false;
                     espada->rec.x=0;
                     espada->rec.y=0;
-                    //espada->rec = player->rec;
                     player->attackTimer = 0;
 
                 }
@@ -495,7 +487,7 @@ void checa_colisao_mapa(Character *player, char mapaJogo[][COLUNAS], Infos *sett
 void checa_colisao_personagem(Character *enemy, char mapaJogo[][COLUNAS], Infos *settings, Character *player)
 {
     int ja_morreu = 0;
-    for (int inimigo = 0; inimigo < MAX_INIMIGO; inimigo++)
+    for (int inimigo = 0; inimigo < settings->num_inimigos; inimigo++)
     {
         if (ja_morreu == 0)
         {
@@ -529,7 +521,7 @@ int main()
 
 
     SetupWindow();
-    Triangle bloco = SetupTriangle();
+    Triangle triangulo = SetupTriangle();
 
     char mapaJogo[16][24];
 
@@ -538,6 +530,7 @@ int main()
 
     Character player;
     Character enemy[MAX_INIMIGO];
+
     Sword espada;
 
     SCORE highscores[MAX_SCORES];
@@ -552,7 +545,7 @@ int main()
     char name[MAX_INPUT_CHARS + 1] = "\0";      // NOTE: One extra space required for null terminator char '\0'
     int letterCount = 0;
 
-    Rectangle textBox = { WIDTH/2.0f - 250, 180, 500, 50 };
+    Rectangle textBox = { WIDTH/2.0f - 250, 400, 500, 50 };
     int framesCounter = 0;
 
     inicializa_jogo(&settings);
@@ -566,7 +559,7 @@ int main()
     while(!WindowShouldClose())
     {
         //Prog
-        ProgSelector(&bloco, &select, menu);
+        ProgSelector(&triangulo, &select, menu);
 
         BeginDrawing();
 
@@ -593,7 +586,7 @@ int main()
             // TODO: Update TITLE screen variables here!
             DrawText("TITLE SCREEN", 20, 20, 40, DARKGREEN);
             DrawText("PRESS ENTER to JUMP to SELECTED SCREEN", 0, 0, 20, DARKGREEN);
-            DrawSelector(bloco);
+            DrawSelector(triangulo);
             DrawTitle();
             DrawMenu(menu);
 
@@ -624,7 +617,7 @@ int main()
             // TODO: Update GAMEPLAY screen variables here!
             if (player.vidas == 0) // pula pra tela de game over e reinicializa o nivel para seu estado inicial
             {
-                //inicializa_jogo(&settings);
+                inicializa_jogo(&settings);
                 le_nivel(&sprites, &settings, mapaJogo);
                 inicializa_pos_jogador(&player, &settings, mapaJogo);
                 inicializa_pos_inimigo(enemy, &settings, mapaJogo);
@@ -634,11 +627,10 @@ int main()
             }
 
                    // passar de nivel
-            if (settings.num_inimigos_mortos == settings.num_inimigos)
+            else if (settings.num_inimigos_mortos == settings.num_inimigos)
             {
                 settings.currentLevel++;
-                // Reseta num de inimigos para o proximo nivel
-                settings.num_inimigos = 0;
+                // Reseta num de inimigos mortos para o proximo nivel
                 settings.num_inimigos_mortos = 0;
 
                 le_nivel(&sprites, &settings, mapaJogo);
@@ -648,7 +640,7 @@ int main()
 
                 inicializa_pos_jogador(&player, &settings, mapaJogo);
 
-                // Reseta rectangle jogador com as novas posicoes iniciais
+                // Reseta rectangle jogador com as novas posicoes iniciais já que a rotina inicializa_jogador nao pode ser chamada pois resetaria o score e as vidas
                    player.rec = (Rectangle)
                 {
                     x: player.posXinicial,
@@ -659,20 +651,13 @@ int main()
 
                 inicializa_pos_inimigo(enemy, &settings, mapaJogo);
 
-                // Reseta rectangle iniigo com as novas posicoes iniciais
+                inicializa_inimigo(enemy, &sprites, &settings);
 
                 for (int inimigo = 0; inimigo < settings.num_inimigos; inimigo++)
                 {
-                    enemy[inimigo].rec = (Rectangle)
-                    {
-                        x:      enemy[inimigo].posXinicial,
-                        y:      enemy[inimigo].posYinicial,
-                        width:  sprites.enemy_down.width,
-                        height: sprites.enemy_down.height
-                    };
+                    enemy[inimigo].velocidade += 0.5; // A cada passagem de nivel velocidade dos inimigos e a dificuldade aumenta
                 }
 
-                inicializa_inimigo(enemy, &sprites, &settings);
             }
 
             le_nivel(&sprites, &settings, mapaJogo);
@@ -681,7 +666,7 @@ int main()
             move_espada(&espada, &player);
             checa_colisao_mapa(&player, mapaJogo, &settings, &sprites, &espada);
             checa_ataque(&player, &espada, &sprites);
-            for (int inimigo = 0; inimigo < MAX_INIMIGO; inimigo++)
+            for (int inimigo = 0; inimigo < settings.num_inimigos; inimigo++)
             {
                 move_inimigo(&enemy[inimigo]);
                 checa_colisao_mapa(&enemy[inimigo], mapaJogo, &settings, &sprites, &espada);
@@ -689,10 +674,17 @@ int main()
             checa_colisao_personagem(enemy, mapaJogo, &settings, &player);
             checa_colisao_espada(enemy, mapaJogo, &settings, &player, espada);
 
+            for(int i=0; i<MAX_INIMIGO;i++)
+            {
+                printf("%d ",enemy[i].vidas);
+            }
+                printf("\n");
+
         }
         break;
         case EXTRA:
         {
+
             DrawRectangle(0, 0, WIDTH, HEIGHT, PINK);
             DrawText("EXTRA SCREEN", 20, 20, 40, MAROON);
             DrawText("PRESS ENTER to JUMP to ENDING SCREEN", 0, 0, 20, MAROON);
@@ -701,6 +693,7 @@ int main()
             {
                 settings.currentState = TITLE;
             }
+
         }
         break;
         case SCOREBOARD:
@@ -721,45 +714,43 @@ int main()
         }
         break;
         case GAMEOVER:
-        {
+            {
                 // TODO: Update ENDING screen variables here!
                 // Pedir infos e atualizar hihgscores
-                DrawRectangle(0, 0, WIDTH, HEIGHT, BLUE);
-                DrawText("GAME OVER", 300, 400, 40, DARKBLUE);
-                DrawText("INFORME SEU NOME", 0, 0, 20, DARKBLUE);
+                DrawRectangle(0, 0, WIDTH, HEIGHT, BLACK);
+                DrawText("GAME OVER", 300, 200, 100, WHITE);
+                DrawText("INFORME SEU NOME", 395, 330, 40, ORANGE);
 
-                    prog_save(&letterCount,&name,framesCounter);
-                    DrawText("PREASE INSERT YOUR NAME", 240, 140, 20, GRAY);
+                // Pega o nome do jogadorF
+                prog_save(&letterCount,&name,framesCounter);
 
-                    DrawRectangleRec(textBox, LIGHTGRAY);
-                    DrawRectangleLines((int)textBox.x, (int)textBox.y, (int)textBox.width, (int)textBox.height, DARKGRAY);
+                DrawRectangleRec(textBox, LIGHTGRAY);
+                DrawRectangleLines((int)textBox.x, (int)textBox.y, (int)textBox.width, (int)textBox.height, DARKGRAY);
 
-                    DrawText(name, (int)textBox.x + 5, (int)textBox.y + 8, 40, MAROON);
+                DrawText(name, (int)textBox.x + 5, (int)textBox.y + 8, 40, WHITE);
 
-                    DrawText(TextFormat("INPUT CHARS: %i/%i", letterCount, MAX_INPUT_CHARS), 315, 250, 20, DARKGRAY);
-
-
-                    if (letterCount < MAX_INPUT_CHARS)
-                    {
-                        // Draw blinking underscore char
-                        if (((framesCounter/10)%2) == 0) DrawText("_", (int)textBox.x + 8 + MeasureText(name, 40), (int)textBox.y + 12, 40, MAROON);
-                    }
-                    else DrawText("Press BACKSPACE to delete chars...", 230, 300, 20, GRAY);
-
-                    // Press enter to return to TITLE screen
-                    if (IsKeyPressed(KEY_ENTER))
-                    {
-
-                        strncpy (player_score.nome, name, MAX_INPUT_CHARS);
-                        player_score.score = settings.score;
-
-                        atualiza_highscores(highscores, player_score);
+                DrawText(TextFormat("INPUT CHARS: %i/%i", letterCount, MAX_INPUT_CHARS), 350, 470, 20, DARKGRAY);
 
 
-                            escreve_arquivo(highscores, "highscores.bin");
-                            settings.currentState = TITLE;
+                if (letterCount < MAX_INPUT_CHARS)
+                {
+                    // Draw blinking underscore char
+                    if (((framesCounter/10)%2) == 0) DrawText("_", (int)textBox.x + 8 + MeasureText(name, 40), (int)textBox.y + 12, 40, WHITE);
+                }
+                else DrawText("Press BACKSPACE to delete chars...", 350, 500, 20, GRAY);
+
+                // Press enter to return to TITLE screen
+                if (IsKeyPressed(KEY_ENTER))
+                {
+
+                    strncpy (player_score.nome, name, MAX_INPUT_CHARS);
+                    player_score.score = settings.score;
+
+                    atualiza_highscores(highscores, player_score);
 
 
+                    escreve_arquivo(highscores, "highscores.bin");
+                    settings.currentState = TITLE;
                 }
             }
         break;

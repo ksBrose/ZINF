@@ -176,7 +176,7 @@ void inicializa_jogador(Character *player, Textures *sprites)
 
 void inicializa_inimigo(Character enemy[], Textures *sprites, Infos *settings)
 {
-    for (int inimigo = 0; inimigo < settings->num_inimigos; inimigo++)
+    for (int inimigo = 0; inimigo < MAX_INIMIGO; inimigo++)
     {
 
         enemy[inimigo].rec = (Rectangle)
@@ -673,6 +673,13 @@ int main()
             }
             checa_colisao_personagem(enemy, mapaJogo, &settings, &player);
             checa_colisao_espada(enemy, mapaJogo, &settings, &player, espada);
+
+            for(int i=0; i<MAX_INIMIGO;i++)
+            {
+                printf("%d ",enemy[i].vidas);
+            }
+                printf("\n");
+
         }
         break;
         case EXTRA:
