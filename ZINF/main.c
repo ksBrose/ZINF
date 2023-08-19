@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "raylib.h"
 #include "menu.h"
 #include "scoreboard.h"
@@ -216,7 +217,8 @@ void inicializa_inimigo(Character enemy[], Textures *sprites, Infos *settings)
         enemy[inimigo].collisionDown = false;
         enemy[inimigo].collisionRight = false;
         enemy[inimigo].collisionLeft = false;
-
+        enemy[inimigo].attackTimer = 0;
+        enemy[inimigo].walking =false;
     }
 
     return 0;
@@ -351,37 +353,143 @@ void move_jogador(Character *player)
 
 void move_inimigo(Character *enemy)
 {
-    if (enemy->vidas > 0)
+
+    int r,rmin=0, rmax=10;
+    r= rmin + (rand() % (rmax-rmin-1));
+
+    if (enemy->vidas > 0 && enemy->walking == false)
     {
-            switch(enemy->rotacao)
-    {
-    case 'S':
-        if (enemy->collisionDown == false)
-            enemy->rec.y += enemy->velocidade;
-        else if (enemy->collisionDown == true)
-            enemy->rotacao = 'W';
-        break;
-    case 'W':
-        if (enemy->collisionUp == false)
-            enemy->rec.y -= enemy->velocidade;
-        else if (enemy->collisionUp == true)
-            enemy->rotacao = 'S';
-        break;
-    case 'D':
-        if (enemy->collisionRight == false)
-            enemy->rec.x += enemy->velocidade;
-        else if (enemy->collisionRight == true)
-            enemy->rotacao = 'A';
-        break;
-    case 'A':
-        if (enemy->collisionLeft == false)
-            enemy->rec.x -= enemy->velocidade;
-        else if (enemy->collisionLeft == true)
-            enemy->rotacao = 'D';
-        break;
+        switch(enemy->rotacao)
+        {
+        case 'S':
+            if(r >=0 && r <=4)
+            {
+                enemy->rotacao = 'S';
+                enemy->walking = true;
+            }
+            else if(r >=5 && r <=6)
+            {
+                enemy->rotacao = 'A';
+                enemy->walking = true;
+            }
+            else if(r >=7 && r <=8)
+            {
+                enemy->rotacao = 'D';
+                enemy->walking = true;
+            }
+            else if(r == 9 )
+            {
+                enemy->rotacao = 'W';
+                enemy->walking = true;
+            }
+            break;
+        case 'W':
+            if(r >=0 && r <=4)
+            {
+                enemy->rotacao = 'W';
+                enemy->walking = true;
+            }
+            else if(r >=5 && r <=6)
+            {
+                enemy->rotacao = 'A';
+                enemy->walking = true;
+            }
+            else if(r >=7 && r <=8)
+            {
+                enemy->rotacao = 'D';
+                enemy->walking = true;
+            }
+            else if(r == 9 )
+            {
+                enemy->rotacao = 'S';
+                enemy->walking = true;
+            }
+            break;
+        case 'D':
+            if(r >=0 && r <=4)
+            {
+                enemy->rotacao = 'D';
+                enemy->walking = true;
+            }
+            else if(r >=5 && r <=6)
+            {
+                enemy->rotacao = 'W';
+                enemy->walking = true;
+            }
+            else if(r >=7 && r <=8)
+            {
+                enemy->rotacao = 'S';
+                enemy->walking = true;
+            }
+            else if(r == 9 )
+            {
+                enemy->rotacao = 'A';
+                enemy->walking = true;
+            }
+            break;
+        case 'A':
+            if(r >=0 && r <=4)
+            {
+                enemy->rotacao = 'A';
+                enemy->walking = true;
+            }
+            else if(r >=5 && r <=6)
+            {
+                enemy->rotacao = 'W';
+                enemy->walking = true;
+            }
+            else if(r >=7 && r <=8)
+            {
+                enemy->rotacao = 'S';
+                enemy->walking = true;
+            }
+            else if(r == 9 )
+            {
+                enemy->rotacao = 'D';
+                enemy->walking = true;
+            }
+            break;
+        }
     }
+    if (enemy->vidas > 0 && enemy->walking == true)
+    {
+        switch(enemy->rotacao)
+        {
+        case 'S':
+            if (enemy->collisionDown == false)
+                enemy->rec.y += enemy->velocidade;
+            else if (enemy->collisionDown == true)
+                enemy->rotacao = 'W';
+            break;
+        case 'W':
+            if (enemy->collisionUp == false)
+                enemy->rec.y -= enemy->velocidade;
+            else if (enemy->collisionUp == true)
+                enemy->rotacao = 'S';
+            break;
+        case 'D':
+            if (enemy->collisionRight == false)
+                enemy->rec.x += enemy->velocidade;
+            else if (enemy->collisionRight == true)
+                enemy->rotacao = 'A';
+            break;
+        case 'A':
+            if (enemy->collisionLeft == false)
+                enemy->rec.x -= enemy->velocidade;
+            else if (enemy->collisionLeft == true)
+                enemy->rotacao = 'D';
+            break;
+        }
+        //if(enemy->attackTimer >= 50 / enemy->velocidade)
+        if((int)enemy->rec.x % 50 == 0 && ((int)enemy->rec.y - 10) % 50 == 0)
+        {
+            enemy->walking = false;
+
+        }
+
 
     }
+
 }
 
 void checa_colisao_mapa(Character *player, char mapaJogo[][COLUNAS], Infos *settings, Textures *sprites, Sword *espada)
@@ -521,7 +629,7 @@ int main()
 {
     int select = 0;
     char menu [TAMMENU][15] = {"Iniciar","Extra","Scoreboard", "Sair"};
-
+    srand(time(NULL));
 
     SetupWindow();
     Triangle triangulo = SetupTriangle();
@@ -678,12 +786,6 @@ int main()
             checa_colisao_personagem(enemy, mapaJogo, &settings, &player);
             checa_colisao_espada(enemy, mapaJogo, &settings, &player, espada);
 
-            for(int i=0; i<MAX_INIMIGO;i++)
-            {
-                printf("%d ",enemy[i].vidas);
-            }
-                printf("\n");
-
         }
         break;
         case EXTRA:
@@ -743,6 +845,7 @@ int main()
                 }
                 else DrawText("Press BACKSPACE to delete chars...", 350, 500, 20, GRAY);
 
+
                 // Press enter to return to TITLE screen
                 if (IsKeyPressed(KEY_ENTER))
                 {
@@ -753,7 +856,15 @@ int main()
 
 
                     escreve_arquivo(highscores, "highscores.bin");
-                    settings.currentState = TITLE;
+
+                    //zera escores e nivel atual que não é zerado ao terminar o jogo completando todos o niveis
+                    inicializa_jogo(&settings);
+                    le_nivel(&sprites, &settings, mapaJogo, &player_score);
+                    inicializa_pos_jogador(&player, &settings, mapaJogo);
+                    inicializa_pos_inimigo(enemy, &settings, mapaJogo);
+                    inicializa_jogador(&player, &sprites);
+                    inicializa_inimigo(enemy, &sprites, &settings);
+                    inicializa_espada(&espada, &sprites);
                 }
             }
         break;

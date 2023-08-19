@@ -20,5 +20,6 @@ typedef struct character
     bool attackDown;
     bool attackRight;
     bool attackLeft;
+    bool walking;
     Texture2D direction;
 } Character;
