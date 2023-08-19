@@ -27,24 +27,20 @@ void le_arquivo_score(SCORE *scores[])
 
 void atualiza_highscores(SCORE hs[], SCORE nv)
 {
-    int ind, continua, fim;
-    fim = MAX_SCORES-1;                     //sizeof(hs)??
-    SCORE aux;
-    if( nv.score > hs[MAX_SCORES-1].score)  //checa se a pontuação é maior que o ultimo da lista
-    {
-        hs[MAX_SCORES-1]=nv;                //insere a pontuação mais abaixo da lista para fazer u buuble depois
-    }
-    for (ind = fim; ind > 0; ind--)
-    {
-        if( hs[ind].score > hs[ind-1].score )
-        {
-            aux = hs[ind-1];
-            hs[ind-1] = hs[ind];
-            hs[ind] = aux;
-            //continua = 1;
+
+    SCORE score_aux;
+    for (int i = (MAX_SCORES - 1); i >= 0; i--){
+        if (nv.score > hs[i].score){
+                if (i == (MAX_SCORES - 1)){ // se i for (MAX_SCORES - 1) - ultimo lugar do placar - só armazena o novo score e descarta o score que estava na ultima posição
+                    hs[i] = nv;
+                }
+                else { // senão
+                    score_aux = hs[i]; // armazena o score atual da posição i numa auxiliar
+                    hs[i] = nv; // atualiza o score da posição i com o novo score
+                    hs[i+1] = score_aux; // o score antigo da posição i cai uma posição, sendo assim scores[i+]. score[3] vira score[4]
+                }
         }
     }
-    //}while(continua==1);
 
 }
 
