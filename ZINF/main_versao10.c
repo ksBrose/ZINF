@@ -239,13 +239,6 @@ void display_jogo(Character *player, Character enemy[], char mapaJogo[][COLUNAS]
     sprintf(escore, "ESCORE: %d", settings->score);
     DrawText(escore, 330, 15, 30, WHITE);
 
-    sprintf(inimigos_mortos, "%d", settings->num_inimigos_mortos);
-
-    DrawText(inimigos_mortos, 700, 15, 30, WHITE);
-
-    sprintf(inimigos, "%d", settings->num_inimigos);
-
-    DrawText(inimigos, 900, 15, 30, WHITE);
 
 //  Desenha chao
 
