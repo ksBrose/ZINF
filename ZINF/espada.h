@@ -75,7 +75,7 @@ void checa_colisao_espada(Character *enemy, char mapaJogo[][COLUNAS], Infos *set
         if(player->attackUp == true)
         {
 
-            for (int inimigo = 0; inimigo < MAX_INIMIGO; inimigo++)
+            for (int inimigo = 0; inimigo < settings->num_inimigos; inimigo++)
             {
                 if (ja_morreu == 0 && enemy[inimigo].vidas > 0)
                 {
@@ -90,77 +90,74 @@ void checa_colisao_espada(Character *enemy, char mapaJogo[][COLUNAS], Infos *set
                     }
                 }
             }
-
-            break;
-        case 'S':
-
-            if(player->attackDown == true)
-            {
-
-                for (int inimigo = 0; inimigo < MAX_INIMIGO; inimigo++)
-                {
-                    if (ja_morreu == 0 && enemy[inimigo].vidas > 0)
-                    {
-                        if (CheckCollisionRecs(espada.rec, enemy[inimigo].rec))
-                        {
-                            enemy[inimigo].vidas--;
-                            //enemy[inimigo].rec.x = 0;
-                            //enemy[inimigo].rec.y = 0;
-                            ja_morreu = 1;
-                            settings->score += 100;
-                            settings->num_inimigos_mortos++;
-                        }
-                    }
-                }
-            }
-            break;
-        case 'A':
-
-            if(player->attackLeft == true)
-            {
-
-                for (int inimigo = 0; inimigo < MAX_INIMIGO; inimigo++)
-                {
-                    if (ja_morreu == 0 && enemy[inimigo].vidas > 0)
-                    {
-                        if (CheckCollisionRecs(espada.rec, enemy[inimigo].rec))
-                        {
-                            enemy[inimigo].vidas--;
-                            //enemy[inimigo].rec.x = 0;
-                            //enemy[inimigo].rec.y = 0;
-                            ja_morreu = 1;
-                            settings->score += 100;
-                            settings->num_inimigos_mortos++;
-                        }
-
-                    }
-                }
-            }
-            break;
-        case 'D':
-
-            if(player->attackRight == true)
-            {
-
-                for (int inimigo = 0; inimigo < MAX_INIMIGO; inimigo++)
-                {
-                    if (ja_morreu == 0 && enemy[inimigo].vidas > 0)
-                    {
-                        if (CheckCollisionRecs(espada.rec, enemy[inimigo].rec))
-                        {
-                            enemy[inimigo].vidas--;
-                            //enemy[inimigo].rec.x = 0;
-                            //enemy[inimigo].rec.y = 0;
-                            ja_morreu = 1;
-                            settings->score += 100;
-                            settings->num_inimigos_mortos++;
-                        }
-
-                    }
-                }
-            }
-            break;
         }
+        break;
+    case 'S':
+
+        if(player->attackDown == true)
+        {
+
+            for (int inimigo = 0; inimigo < settings->num_inimigos; inimigo++)
+            {
+                if (ja_morreu == 0 && enemy[inimigo].vidas > 0)
+                {
+                    if (CheckCollisionRecs(espada.rec, enemy[inimigo].rec))
+                    {
+                        enemy[inimigo].vidas--;
+                        //enemy[inimigo].rec.x = 0;
+                        //enemy[inimigo].rec.y = 0;
+                        ja_morreu = 1;
+                        settings->score += 100;
+                        settings->num_inimigos_mortos++;
+                    }
+                }
+            }
+        }
+        break;
+    case 'A':
+
+        if(player->attackLeft == true)
+        {
+            for (int inimigo = 0; inimigo < settings->num_inimigos; inimigo++)
+            {
+                if (ja_morreu == 0 && enemy[inimigo].vidas > 0)
+                {
+                    if (CheckCollisionRecs(espada.rec, enemy[inimigo].rec))
+                    {
+                        enemy[inimigo].vidas--;
+                        //enemy[inimigo].rec.x = 0;
+                        //enemy[inimigo].rec.y = 0;
+                        ja_morreu = 1;
+                        settings->score += 100;
+                        settings->num_inimigos_mortos++;
+                    }
+
+                }
+            }
+        }
+        break;
+    case 'D':
+        if(player->attackRight == true)
+        {
+
+            for (int inimigo = 0; inimigo < settings->num_inimigos; inimigo++)
+            {
+                if (ja_morreu == 0 && enemy[inimigo].vidas > 0)
+                {
+                    if (CheckCollisionRecs(espada.rec, enemy[inimigo].rec))
+                    {
+                        enemy[inimigo].vidas--;
+                        //enemy[inimigo].rec.x = 0;
+                        //enemy[inimigo].rec.y = 0;
+                        ja_morreu = 1;
+                        settings->score += 100;
+                        settings->num_inimigos_mortos++;
+                    }
+
+                }
+            }
+        }
+        break;
     }
 }
 
@@ -169,9 +166,6 @@ void checa_ataque(Character *player, Sword *espada, Textures *sprites)
     switch(player->rotacao)
     {
     case 'S':
-        //  player->attackUp = false;
-        //  player->attackLeft = false;
-        //  player->attackRight = false;
         if (IsKeyPressed(KEY_J) && player->attackTimer == 0)
         {
             player->attackDown = true;
@@ -182,9 +176,6 @@ void checa_ataque(Character *player, Sword *espada, Textures *sprites)
 
         break;
     case 'W':
-        //  player->attackDown = false;
-        //  player->attackLeft = false;
-        //   player->attackRight = false;
         if (IsKeyPressed(KEY_J) && player->attackTimer == 0)
         {
             player->attackUp = true;
@@ -195,9 +186,6 @@ void checa_ataque(Character *player, Sword *espada, Textures *sprites)
 
         break;
     case 'D':
-        // player->attackUp = false;
-        //  player->attackDown = false;
-        //  player->attackLeft = false;
         if (IsKeyPressed(KEY_J) && player->attackTimer == 0)
         {
             player->attackRight = true;
@@ -208,9 +196,6 @@ void checa_ataque(Character *player, Sword *espada, Textures *sprites)
 
         break;
     case 'A':
-        // player->attackUp = false;
-        // player->attackDown = false;
-        // player->attackRight = false;
         if (IsKeyPressed(KEY_J) && player->attackTimer == 0)
         {
             player->attackLeft = true;
@@ -221,6 +206,8 @@ void checa_ataque(Character *player, Sword *espada, Textures *sprites)
 
         break;
     }
+
+
     if(player->attackUp == true)
     {
         DrawTexture(espada->direction, espada->rec.x, espada->rec.y, GREEN);
