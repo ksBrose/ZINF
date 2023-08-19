@@ -66,7 +66,7 @@ void checa_colisao_espada(Character *enemy, char mapaJogo[][COLUNAS], Infos *set
             espada.rec.height = 150;
             espada.rec.width = 50;
 
-            for (int inimigo = 0; inimigo < MAX_INIMIGO; inimigo++)
+            for (int inimigo = 0; inimigo < settings->num_inimigos; inimigo++)
             {
                 if (ja_morreu == 0 && enemy[inimigo].vidas > 0)
                 {
@@ -90,7 +90,7 @@ void checa_colisao_espada(Character *enemy, char mapaJogo[][COLUNAS], Infos *set
             espada.rec.y = player->rec.y+50;
             espada.rec.height = 150;
             espada.rec.width = 50;
-            for (int inimigo = 0; inimigo < MAX_INIMIGO; inimigo++)
+            for (int inimigo = 0; inimigo < settings->num_inimigos; inimigo++)
             {
                 if (ja_morreu == 0 && enemy[inimigo].vidas > 0)
                 {
@@ -114,7 +114,7 @@ void checa_colisao_espada(Character *enemy, char mapaJogo[][COLUNAS], Infos *set
             espada.rec.y = player->rec.y;
             espada.rec.height = 50;
             espada.rec.width = 150;
-            for (int inimigo = 0; inimigo < MAX_INIMIGO; inimigo++)
+            for (int inimigo = 0; inimigo < settings->num_inimigos; inimigo++)
             {
                 if (ja_morreu == 0 && enemy[inimigo].vidas > 0)
                 {
@@ -139,7 +139,7 @@ void checa_colisao_espada(Character *enemy, char mapaJogo[][COLUNAS], Infos *set
             espada.rec.y = player->rec.y;
             espada.rec.height = 50;
             espada.rec.width = 150;
-            for (int inimigo = 0; inimigo < MAX_INIMIGO; inimigo++)
+            for (int inimigo = 0; inimigo < settings->num_inimigos; inimigo++)
             {
                 if (ja_morreu == 0 && enemy[inimigo].vidas > 0)
                 {
