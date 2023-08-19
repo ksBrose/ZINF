@@ -617,6 +617,7 @@ int main()
             // TODO: Update GAMEPLAY screen variables here!
             if (player.vidas == 0) // pula pra tela de game over e reinicializa o nivel para seu estado inicial
             {
+                player_score.score = settings.score;
                 inicializa_jogo(&settings);
                 le_nivel(&sprites, &settings, mapaJogo);
                 inicializa_pos_jogador(&player, &settings, mapaJogo);
