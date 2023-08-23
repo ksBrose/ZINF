@@ -15,7 +15,7 @@ void DrawScoreboard(SCORE *highscores)
     }
 }
 
-void le_arquivo_score(SCORE *scores[])
+void le_arquivo_score(SCORE *scores)
 {
     FILE *arq;
     arq = fopen("highscores.bin", "rb");

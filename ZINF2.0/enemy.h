@@ -20,7 +20,6 @@ void inicializa_pos_inimigo(Character enemy[], Infos *settings, char mapaJogo[][
         }
     }
 
-    return 0;
 }
 
 
@@ -73,7 +72,6 @@ void inicializa_inimigo(Character enemy[], Textures *sprites, Infos *settings)
         enemy[inimigo].damage = LoadSound("./Sons/damageenemy.mp3");
     }
 
-    return 0;
 }
 
 

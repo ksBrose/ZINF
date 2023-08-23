@@ -1,5 +1,3 @@
-
-
 typedef enum GameScreen
 {
     TITLE,
@@ -21,7 +19,7 @@ typedef enum GameMode
 typedef struct informacoes
 {
     GameScreen currentState;
-    GameScreen currentMode;
+    GameMode currentMode;
     Rectangle gameArea;
     bool closeGame;
     bool requestcloseGame;

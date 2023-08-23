@@ -16,7 +16,7 @@ typedef struct tipo_score
 
 void DrawScoreboard(SCORE *highscores);
 
-void le_arquivo_score(SCORE *scores[]);
+void le_arquivo_score(SCORE *scores);
 
 void atualiza_highscores(SCORE hs[], SCORE nv);
 

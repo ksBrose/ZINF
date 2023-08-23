@@ -33,7 +33,6 @@ height:
     espada->sound = LoadSound("./Sons/sword.mp3");
     espada->hitwall = LoadSound("./Sons/swordwall.mp3");
 
-    return 0;
 }
 
 void move_espada(Sword *espada, Character *player)

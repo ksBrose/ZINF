@@ -151,3 +151,54 @@
 1692753952 c:\users\kelvin-pc\downloads\zinf-main (7)\zinf-main\zinf\map.h
 	"raylib.h"
 
+1692759886 source:c:\users\kelvin-pc\downloads\zinf-main (8)\zinf-main\zinf2.0\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"raylib.h"
+	"menu.h"
+	"scoreboard.h"
+	"character.h"
+	"sprites.h"
+	"espada.h"
+	"player.h"
+	"enemy.h"
+	"map.h"
+
+1692757113 c:\users\kelvin-pc\downloads\zinf-main (8)\zinf-main\zinf2.0\menu.h
+	"raylib.h"
+
+1692760105 c:\users\kelvin-pc\downloads\zinf-main (8)\zinf-main\zinf2.0\scoreboard.h
+	<stdio.h>
+	<string.h>
+	"raylib.h"
+
+1692757113 c:\users\kelvin-pc\downloads\zinf-main (8)\zinf-main\zinf2.0\character.h
+	"raylib.h"
+
+1692757113 c:\users\kelvin-pc\downloads\zinf-main (8)\zinf-main\zinf2.0\sprites.h
+	"raylib.h"
+
+1692759894 c:\users\kelvin-pc\downloads\zinf-main (8)\zinf-main\zinf2.0\espada.h
+	"raylib.h"
+	"Infos.h"
+
+1692759934 c:\users\kelvin-pc\downloads\zinf-main (8)\zinf-main\zinf2.0\infos.h
+
+1692759955 c:\users\kelvin-pc\downloads\zinf-main (8)\zinf-main\zinf2.0\player.h
+	"raylib.h"
+
+1692759966 c:\users\kelvin-pc\downloads\zinf-main (8)\zinf-main\zinf2.0\enemy.h
+	"raylib.h"
+
+1692760044 c:\users\kelvin-pc\downloads\zinf-main (8)\zinf-main\zinf2.0\map.h
+	"raylib.h"
+	"math.h"
+
+1692757113 source:c:\users\kelvin-pc\downloads\zinf-main (8)\zinf-main\zinf2.0\menu.c
+	"menu.h"
+
+1692760109 source:c:\users\kelvin-pc\downloads\zinf-main (8)\zinf-main\zinf2.0\scoreboard.c
+	"scoreboard.h"
+

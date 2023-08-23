@@ -1,4 +1,5 @@
 #include "raylib.h"
+#include "math.h"
 #define LINHAS 16
 #define COLUNAS 24
 
@@ -48,7 +49,8 @@ void le_nivel(Textures *textures, Infos *settings, char mapaJogo[][COLUNAS], SCO
 
 void display_jogo(Character *player, Character enemy[], char mapaJogo[][COLUNAS], Textures *sprites, Infos *settings)
 {
-    char nivel[7], vidas[2], escore[10], inimigos_mortos[10], inimigos[10];
+    char nivel[7], vidas[2], escore[10];
+    //char inimigos_mortos[10], inimigos[10];
     Rectangle areia, pedras;
 
     ClearBackground(BLACK);

@@ -17,7 +17,7 @@ void inicializa_pos_jogador(Character *player, Infos *settings, char mapaJogo[][
             }
         }
     }
-    return 0;
+
 }
 
 
@@ -60,7 +60,7 @@ x:
     //timer da espada (visivel)
     player->attackTimer = 0;
     player->damage = LoadSound("./Sons/damageplayer.mp3");
-    return 0;
+
 }
 
 
