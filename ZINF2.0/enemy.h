@@ -3,9 +3,10 @@
 #define COLUNAS 24
 #define MAX_INIMIGO 10
 
+/*Dado um inimigo, as settings e o mapa do jogo, inicializa a posi√ß√£o do inimigo fornecido*/
 void inicializa_pos_inimigo(Character enemy[], Infos *settings, char mapaJogo[][COLUNAS])
 {
-    //le o mapa e salva posiÁ„o de cada inimigo
+    //le o mapa e salva posi√ß√£o de cada inimigo
     int inimigo = 0;
     for (int i = 0; i < LINHAS; i++)
     {
@@ -13,8 +14,8 @@ void inicializa_pos_inimigo(Character enemy[], Infos *settings, char mapaJogo[][
         {
             if (mapaJogo[i][j] == 'M')
             {
-                enemy[inimigo].posXinicial = (j*50) + settings->gameArea.x; // coluna*50pixel(tamanho da sprite) + posiÁ„o x ocupada pelo jogo na tela
-                enemy[inimigo].posYinicial = (i*50) + settings->gameArea.y; // linhaa*50pixel(tamanho da sprite) + posiÁ„o y ocupada pelo jogo na tela
+                enemy[inimigo].posXinicial = (j*50) + settings->gameArea.x; // coluna*50pixel(tamanho da sprite) + posi√ß√£o x ocupada pelo jogo na tela
+                enemy[inimigo].posYinicial = (i*50) + settings->gameArea.y; // linhaa*50pixel(tamanho da sprite) + posi√ß√£o y ocupada pelo jogo na tela
                 inimigo++;
             }
         }
@@ -22,7 +23,7 @@ void inicializa_pos_inimigo(Character enemy[], Infos *settings, char mapaJogo[][
 
 }
 
-
+/*Dado um inimigo, as sprites e as settings, inicializa as vari√°veis do inimigo fornecido*/
 void inicializa_inimigo(Character enemy[], Textures *sprites, Infos *settings)
 {
     //inicializa todos possiveis inimigos
@@ -51,7 +52,7 @@ void inicializa_inimigo(Character enemy[], Textures *sprites, Infos *settings)
             enemy[inimigo].direction = sprites->enemy_right;
             enemy[inimigo].rotacao = 'D';
         }
-        //se o inimigo esta no mapa nicia com 1 ponto de vida se nao n„o tem vida
+        //se o inimigo esta no mapa nicia com 1 ponto de vida se nao n√£o tem vida
         if(enemy[inimigo].rec.x>=0 && enemy[inimigo].rec.x <= WIDTH-50 && enemy[inimigo].rec.y >=60 && enemy[inimigo].rec.y <=HEIGHT-50 )
             enemy[inimigo].vidas = 1;
         else
@@ -74,7 +75,7 @@ void inicializa_inimigo(Character enemy[], Textures *sprites, Infos *settings)
 
 }
 
-
+/*Dado um inimigo, o faz se mover aleatoriamente*/
 void move_inimigo(Character *enemy)
 {
     //variaveis de aleatoriedade
@@ -87,7 +88,7 @@ void move_inimigo(Character *enemy)
         switch(enemy->rotacao)          //confere para que lado o inimigo esta virado
         {
         case 'S':
-            if(r >=0 && r <=4)          //5 de 10 de n„o virar e caminhar
+            if(r >=0 && r <=4)          //5 de 10 de n√£o virar e caminhar
             {
                 enemy->rotacao = 'S';
                 enemy->walking = true;
@@ -176,7 +177,7 @@ void move_inimigo(Character *enemy)
             break;
         }
     }
-    //se o inimigo esta vivo e esta caminhando (caminha e checa colis„o(se colis„o vira sentido oposto))
+    //se o inimigo esta vivo e esta caminhando (caminha e checa colis√£o(se colis√£o vira sentido oposto))
     if (enemy->vidas > 0 && enemy->walking == true)
     {
         switch(enemy->rotacao)
