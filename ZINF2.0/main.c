@@ -312,7 +312,7 @@ int main()
                 atualiza_highscores(highscores, player_score);
 
 
-                escreve_arquivo(highscores, "highscores.bin");
+                escreve_arquivo(highscores, "ranking.bin");
 
                 //zera escores e nivel atual que não é zerado ao terminar o jogo completando todos o niveis
                 inicializa_jogo(&settings);
