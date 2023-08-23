@@ -4,7 +4,6 @@
 #include <time.h>
 #include "raylib.h"
 #include "menu.h"
-#include "Infos.h"
 #include "scoreboard.h"
 #include "character.h"
 #include "sprites.h"
