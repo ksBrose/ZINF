@@ -18,8 +18,8 @@ void DrawScoreboard(SCORE *highscores)
 void le_arquivo_score(SCORE *scores)
 {
     FILE *arq;
-    arq = fopen("highscores.bin", "rb");
-    // lÍ arquivo e armazena no array
+    arq = fopen("ranking.bin", "rb");
+    // l√™ arquivo e armazena no array
     fread(scores, sizeof(SCORE), MAX_SCORES, arq);
     fclose(arq);
 }
@@ -30,13 +30,13 @@ void atualiza_highscores(SCORE hs[], SCORE nv)
     SCORE score_aux;
     for (int i = (MAX_SCORES - 1); i >= 0; i--){
         if (nv.score > hs[i].score){
-                if (i == (MAX_SCORES - 1)){ // se i for (MAX_SCORES - 1) - ultimo lugar do placar - sÛ armazena o novo score e descarta o score que estava na ultima posiÁ„o
+                if (i == (MAX_SCORES - 1)){ // se i for (MAX_SCORES - 1) - ultimo lugar do placar - s√≥ armazena o novo score e descarta o score que estava na ultima posi√ß√£o
                     hs[i] = nv;
                 }
-                else { // se n„o
-                    score_aux = hs[i]; // armazena o score atual da posiÁ„o i numa auxiliar
-                    hs[i] = nv; // atualiza o score da posiÁ„o i com o novo score
-                    hs[i+1] = score_aux; // o score antigo da posiÁ„o i cai uma posiÁ„o, sendo assim scores[i+]. score[3] vira score[4]
+                else { // se n√£o
+                    score_aux = hs[i]; // armazena o score atual da posi√ß√£o i numa auxiliar
+                    hs[i] = nv; // atualiza o score da posi√ß√£o i com o novo score
+                    hs[i+1] = score_aux; // o score antigo da posi√ß√£o i cai uma posi√ß√£o, sendo assim scores[i+]. score[3] vira score[4]
                 }
         }
     }
