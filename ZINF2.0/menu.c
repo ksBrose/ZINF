@@ -23,23 +23,25 @@ cor:
     };
 }
 
-
+/*Dado um triangulo -o icone de seleção do menu- o desenha na tela.*/
 void DrawSelector(Triangle T)
 {
     DrawPoly(T.origem, T.sides, T.radius, T.r, T.cor);
 }
 
+/*Desenha o título na tela.*/
 void DrawTitle()
 {
     ClearBackground(BLACK);
     DrawText("ZINF", (WIDTH - MeasureText("ZINF",Tfonte))/2, 100, Tfonte, RAYWHITE);
 }
 
+/*Dado um array com as opções do menu, o desenha na tela.*/
 void DrawMenu(char menu [TAMMENU][15])
 {
     //desenha o vetor texto menu
     //centralizando cada palavra do seu tamanho
-    //e espa�ando Fonte + Espa�amento da posi��o inicial
+    //e espaçando Fonte + Espaçamento da posição inicial
     int i;
     for(int i = 0; i < TAMMENU ; i++)
     {
@@ -47,6 +49,7 @@ void DrawMenu(char menu [TAMMENU][15])
     }
 }
 
+/*Dado um triângulo, um ponteiro que indica a opção atual, e as opções do menu verifica qual opção foi selecionada.*/
 void ProgSelector(Triangle *T,int *select, char menu [][15])
 {
     T->r += VelRot/FPS;
@@ -60,7 +63,7 @@ void ProgSelector(Triangle *T,int *select, char menu [][15])
             a: 255
         };
     }
-    //apertar W sobe seletor 1 posi��o no menu e S baixa 1 posi��o
+    //apertar W sobe seletor 1 posição no menu e S baixa 1 posição
     if(IsKeyPressed(KEY_W))
     {
         if(*select > 0)
