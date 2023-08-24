@@ -36,13 +36,13 @@ void inicializa_jogo(Infos *settings)
     settings->num_inimigos_mortos = 0;
 }
 
-void BGM(Sound GameOver)
+void BGM(Sound SoundTrack)
 {
-    if(!IsSoundPlaying(GameOver))
+    if(!IsSoundPlaying(SoundTrack))    //se não tiver musica ou ela parar
     {
-        PlaySound(GameOver);
+        PlaySound(SoundTrack);         //inicia a musica selecionada
     }
-    SetSoundVolume(GameOver, 0.5);
+    SetSoundVolume(SoundTrack, 0.5);   //ajusta volume da musica
 }
 
 
@@ -108,8 +108,10 @@ int main()
         {
         case TITLE:
         {
-            StopSound(Main);
-            StopSound(GO);
+            //garantir que não tenha nenhuma musica tocando
+            StopSound(Main);    //para musica principal
+            StopSound(GO);      //para musica da tela de fim de jogo
+            
             //DrawText("TITLE SCREEN", 20, 20, 40, DARKGREEN);
             //DrawText("PRESS ENTER to JUMP to SELECTED SCREEN", 0, 0, 20, DARKGREEN);
             DrawSelector(triangulo);    //seletor
@@ -192,7 +194,7 @@ int main()
             }
 
 
-            BGM(Main);
+            BGM(Main);    //inicia musica principal
             // inicio de jogo
             le_nivel(&sprites, &settings, mapaJogo, &player_score, &player);
             display_jogo(&player, enemy, mapaJogo, &sprites, &settings);
@@ -269,8 +271,8 @@ int main()
         break;
         case GAMEOVER:
         {
-            StopSound(Main);
-            BGM(GO);
+            StopSound(Main); //para musica principal
+            BGM(GO);          //inicia musica da tela de game over
             //Desenha um fundo preto e texto GAME OVER (centralizado)
             DrawRectangle(0, 0, WIDTH, HEIGHT, BLACK);
             DrawText("GAME OVER", (WIDTH/2 - MeasureText("GAME OVER",100)/2), 200, 100, WHITE);
