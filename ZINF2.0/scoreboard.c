@@ -1,6 +1,6 @@
 #include "scoreboard.h"
 
-
+/*Dado um array com os highscores, o desenha na tela.*/
 void DrawScoreboard(SCORE *highscores)
 {
     int i;
@@ -15,6 +15,7 @@ void DrawScoreboard(SCORE *highscores)
     }
 }
 
+/*Dado um array de scores, lê o arquivo ranking.bin e preenche o array fornecido.*/
 void le_arquivo_score(SCORE *scores)
 {
     FILE *arq;
@@ -24,6 +25,7 @@ void le_arquivo_score(SCORE *scores)
     fclose(arq);
 }
 
+/*Dado um array de highscores e um score, atualiza o array com o novo score caso o score fornecido for maior que algum dos termos de highscores.*/
 void atualiza_highscores(SCORE hs[], SCORE nv)
 {
 
@@ -43,6 +45,7 @@ void atualiza_highscores(SCORE hs[], SCORE nv)
 
 }
 
+/*Dado um array de scores e o nome de um arquivo, escreve o array de scores no arquivo com o nome fornecido.*/
 void escreve_arquivo(SCORE* scores, char* nome_arq)
 {
     FILE *p_arq;
@@ -54,7 +57,7 @@ void escreve_arquivo(SCORE* scores, char* nome_arq)
     }
 }
 
-
+/*Dado um contador, uma variavel para armazenar o nome e um contador de frames, preenche a o array de char com o nome digitado.*/
 void prog_save(int *letterCount,char *name, int framesCounter)
 {
     //input do usuario para salvar nome para salvar no highscore
