@@ -16,6 +16,7 @@ typedef struct
     Sound hitwall;
 } Sword;
 
+/*Dada uma espada e as sprites, inicializa as variÃ¡veis da espada.*/
 void inicializa_espada(Sword *espada, Textures *sprites)
 {
     espada->rec = (Rectangle)
@@ -35,6 +36,7 @@ height:
 
 }
 
+/*Dada uma espada e o personagem que possui essa espada, realiza as movimentaÃ§Ãµes dela*/
 void move_espada(Sword *espada, Character *player)
 {
     //move a espada no sentido que ela esta vidara
@@ -67,10 +69,11 @@ void move_espada(Sword *espada, Character *player)
     }
 }
 
+/*Dado um inimigo, o mapa do jogo, as settings, o personagem e a espada, checa se a espada atingiu um inimigo. Caso tenha atingido aumenta a pontuaÃ§Ã£o do jogador e faz o inimigo perder uma vida.*/
 void checa_colisao_espada(Character *enemy, char mapaJogo[][COLUNAS], Infos *settings, Character *player, Sword espada)
 {
 
-    //se a espada encostar no inimigo ativando a colisão o inimigo perde uma vida, é adicionado 100 pontos
+    //se a espada encostar no inimigo ativando a colisÃ£o o inimigo perde uma vida, Ã© adicionado 100 pontos
     //atacke se torna falso e zera o timer da espada (que tem que estar zerado para o proximo ataque)
     int ja_morreu = 0;
 
@@ -193,11 +196,12 @@ void checa_colisao_espada(Character *enemy, char mapaJogo[][COLUNAS], Infos *set
     }
 }
 
+/*Dado um personagem, a espada e as sprites checa a posiÃ§Ã£o em que a espada estÃ¡ virada e se o jogador tiver acionado o ataque desenha a espada durante determinado perÃ­odo.*/
 void checa_ataque(Character *player, Sword *espada, Textures *sprites)
 {
-    //checa posição que jogador e lado que esta virado e joga espana neste sentido se J for presionado
-    //bota a espada na mesma posição do jogador com o sprite correto
-    //obs: se o timer da espada não for zero tu não pode atacar novamente
+    //checa posiÃ§Ã£o que jogador e lado que esta virado e joga espana neste sentido se J for presionado
+    //bota a espada na mesma posiÃ§Ã£o do jogador com o sprite correto
+    //obs: se o timer da espada nÃ£o for zero tu nÃ£o pode atacar novamente
     switch(player->rotacao)
     {
     case 'S':
@@ -247,7 +251,7 @@ void checa_ataque(Character *player, Sword *espada, Textures *sprites)
     }
     //se ataque verdadeiro (espada esta ativada)
     //move a espada com velocidade da espada depois de um tempo TIMEATACK a espada desaparece
-    //quando desaparecer sua posição zera timer zera (jogador não podera atacar denovo até estar zerado)e seta ataque como falso
+    //quando desaparecer sua posiÃ§Ã£o zera timer zera (jogador nÃ£o podera atacar denovo atÃ© estar zerado)e seta ataque como falso
     if(player->attackUp == true)
     {
         DrawTexture(espada->direction, espada->rec.x, espada->rec.y, GREEN);
