@@ -3,15 +3,16 @@
 #define LINHAS 16
 #define COLUNAS 24
 
+/*Dado as sprites, as settings, o mapa do jogo, o score do jogador atual, e um personagem, lÃª o nivel atual e preenche a matriz do mapa. AlÃ©m disso, atribui a pontuaÃ§Ã£o atual ao jogador.*/
 void le_nivel(Textures *textures, Infos *settings, char mapaJogo[][COLUNAS], SCORE *player_score, Character *player)
 {
     //le arquivo nivel X e salva na variavel mapaJogo
     FILE *arq_nivel;
     char caractere, arq_nome[30];
 
-    settings->num_inimigos = 0; // zera a contagem pois o nivel é lido varias vezes durante a execução do jogo
+    settings->num_inimigos = 0; // zera a contagem pois o nivel Ã© lido varias vezes durante a execuÃ§Ã£o do jogo
 
-    sprintf(arq_nome, "nivel%d.txt", settings->currentLevel); // retorna uma string nivel(x).txt na variavel arq_nivel onde x é o nivel atual
+    sprintf(arq_nome, "nivel%d.txt", settings->currentLevel); // retorna uma string nivel(x).txt na variavel arq_nivel onde x Ã© o nivel atual
 
     arq_nivel = fopen(arq_nome, "r");
 
@@ -33,7 +34,7 @@ void le_nivel(Textures *textures, Infos *settings, char mapaJogo[][COLUNAS], SCO
         }
         fclose(arq_nivel);
     }
-    else                //se não termina o jogo
+    else                //se nÃ£o termina o jogo
     {
         if(settings->currentMode == ENDLESS)
         {
@@ -47,6 +48,7 @@ void le_nivel(Textures *textures, Infos *settings, char mapaJogo[][COLUNAS], SCO
     }
 }
 
+/*Dado um personagem, um array de inimigos, o mapa do jogo, as sprites e as settings desenha na tela todas as informaÃ§Ãµes necessÃ¡rias para a jogabilidade do nivel.*/
 void display_jogo(Character *player, Character enemy[], char mapaJogo[][COLUNAS], Textures *sprites, Infos *settings)
 {
     char nivel[7], vidas[2], escore[10];
@@ -148,6 +150,7 @@ void display_jogo(Character *player, Character enemy[], char mapaJogo[][COLUNAS]
     }
 }
 
+/*Dado um personagem, o mapa do jogo, as settings, as sprites e a espada checa se algum dos personagens ou objetos colide com os limites do mapa ou com os obstÃ¡culos.*/
 void checa_colisao_mapa(Character *player, char mapaJogo[][COLUNAS], Infos *settings, Textures *sprites, Sword *espada)
 {
     // Reseta os status de colisao do personagem
@@ -157,22 +160,22 @@ void checa_colisao_mapa(Character *player, char mapaJogo[][COLUNAS], Infos *sett
     player->collisionLeft = false;
 
     // Checa colisao com os limites do mapa
-    // WIDTH - 50 = Largura max do mapa - 50 pixel (tamanho do sprite do corpo do link), se a pos atual for maior do que isso significa que ao dar o prox mov o corpo ja ficará pra fora do mapa
+    // WIDTH - 50 = Largura max do mapa - 50 pixel (tamanho do sprite do corpo do link), se a pos atual for maior do que isso significa que ao dar o prox mov o corpo ja ficarÃ¡ pra fora do mapa
     if (player->rec.x >= WIDTH - 50)
     {
         player->collisionRight = true;
     }
-    // se a pos x for menor que 0 ao dar o prox mov o corpo ficará pra fora do mapa
+    // se a pos x for menor que 0 ao dar o prox mov o corpo ficarÃ¡ pra fora do mapa
     if (player->rec.x <= 0)
     {
         player->collisionLeft = true;
     }
-    // se a pos y for menor que 65 (o espaco que o link se move a cada aperto de tecla + 60 de deslocamento de altura sem a barra de status) significa que ao dar o prox mov o corpo ficará pra fora do mapa
+    // se a pos y for menor que 65 (o espaco que o link se move a cada aperto de tecla + 60 de deslocamento de altura sem a barra de status) significa que ao dar o prox mov o corpo ficarÃ¡ pra fora do mapa
     if (player->rec.y <= 60 + 0)
     {
         player->collisionUp = true;
     }
-    // HEIGHT - 50 = Altura max do mapa - 50 pixel (tamanho do sprite do corpo do link), se a pos atual for maior do que isso significa que ao dar o prox mov o corpo ja ficará pra fora do mapa
+    // HEIGHT - 50 = Altura max do mapa - 50 pixel (tamanho do sprite do corpo do link), se a pos atual for maior do que isso significa que ao dar o prox mov o corpo ja ficarÃ¡ pra fora do mapa
     if (player->rec.y >= HEIGHT - 50)
     {
         player->collisionDown = true;
