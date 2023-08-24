@@ -2,25 +2,25 @@
 #define LINHAS 16
 #define COLUNAS 24
 
-
+/*Dado um personagem, as settings e o mapa do jogo, inicializa a posi√ß√£o do personagem fornecido.*/
 void inicializa_pos_jogador(Character *player, Infos *settings, char mapaJogo[][COLUNAS])
 {
-    //salva posiÁ„o do jogador no mapa
+    //salva posi√ß√£o do jogador no mapa
     for (int i = 0; i < LINHAS; i++)
     {
         for (int j = 0; j < COLUNAS; j++)
         {
             if (mapaJogo[i][j] == 'J')
             {
-                player->posXinicial = (j*50) + settings->gameArea.x; // coluna*50pixel(tamanho da sprite) + posiÁ„o x ocupada pelo jogo na tela
-                player->posYinicial = (i*50) + settings->gameArea.y; // linhaa*50pixel(tamanho da sprite) + posiÁ„o y ocupada pelo jogo na tela
+                player->posXinicial = (j*50) + settings->gameArea.x; // coluna*50pixel(tamanho da sprite) + posi√ß√£o x ocupada pelo jogo na tela
+                player->posYinicial = (i*50) + settings->gameArea.y; // linhaa*50pixel(tamanho da sprite) + posi√ß√£o y ocupada pelo jogo na tela
             }
         }
     }
 
 }
 
-
+/*Dado um personagem, as sprites e as settings, inicializa as vari√°veis do personagem fornecido.*/
 void inicializa_jogador(Character *player, Textures *sprites, Infos *settings)
 {
     player->width = sprites->player_down.width;
@@ -63,7 +63,7 @@ x:
 
 }
 
-
+/*Dado um personagem, o move de acordo com as teclas pressionadas pelo jogador.*/
 void move_jogador(Character *player)
 {
     //move o jogador usando WASD ou setas
@@ -94,7 +94,7 @@ void move_jogador(Character *player)
 
 }
 
-
+/*Dado um inimigo, o mapa do jogo, as settings e um personagem, checa se o personagem se choca a um inimigo. Nesse caso, o tira uma vida e faz todos personagens voltarem √†s posi√ß√µes iniciais do nivel.*/
 void checa_colisao_personagem(Character *enemy, char mapaJogo[][COLUNAS], Infos *settings, Character *player)
 {
     int ja_morreu = 0;  //variavel para nao perder multiplas vidas
@@ -104,13 +104,13 @@ void checa_colisao_personagem(Character *enemy, char mapaJogo[][COLUNAS], Infos 
         {
             if (enemy[inimigo].vidas > 0) //se inimigo ainda esta vivo
             {
-                if (CheckCollisionRecs(player->rec, enemy[inimigo].rec)) //checa coolis„o entre blocos
+                if (CheckCollisionRecs(player->rec, enemy[inimigo].rec)) //checa coolis√£o entre blocos
                 {
                     player->vidas--;                        //perde 1 vida
-                    player->rec.x = player->posXinicial;    //retorna posiÁ„o inicial
+                    player->rec.x = player->posXinicial;    //retorna posi√ß√£o inicial
                     player->rec.y = player->posYinicial;
                     PlaySound(player->damage);
-                    for (int inimigo = 0; inimigo < settings->num_inimigos; inimigo++) //retorna todos inimigos vivos para posiÁ„o inicial respectiva no mapa
+                    for (int inimigo = 0; inimigo < settings->num_inimigos; inimigo++) //retorna todos inimigos vivos para posi√ß√£o inicial respectiva no mapa
                     {
                         enemy[inimigo].rec.x = enemy[inimigo].posXinicial;
                         enemy[inimigo].rec.y = enemy[inimigo].posYinicial;
