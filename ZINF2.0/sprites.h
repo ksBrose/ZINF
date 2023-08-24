@@ -18,6 +18,7 @@ typedef struct textures
     Texture2D enemy_right;
 } Textures;
 
+/*Dado uma variavel sprites, carrega as sprites do jogo.*/
 void carrega_sprites(Textures *sprites)
 {
     sprites->ground = LoadTexture("sprites/Ground.png");
@@ -36,7 +37,7 @@ void carrega_sprites(Textures *sprites)
     sprites->enemy_right = LoadTexture("sprites/Enemy_right.png");
 }
 
-
+/*Dado uma variavel sprites, descarrega as sprites do jogo após o mesmo chegar ao fim.*/
 void descarrega_sprites(Textures *sprites)
 {
 
