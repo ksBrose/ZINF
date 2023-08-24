@@ -12,6 +12,7 @@
 #include "enemy.h"
 #include "map.h"
 
+/*Inicializa a janela do jogo*/
 void SetupWindow()
 {
     InitWindow(WIDTH, HEIGHT, "ZINF");
@@ -20,6 +21,7 @@ void SetupWindow()
     InitAudioDevice();
 }
 
+/*Dado as settings, inicializa as variáveis do jogo em seu estado padrão.*/
 void inicializa_jogo(Infos *settings)
 {
     //area do jogo fica 60 pixels abaixo da janela onde ficaria as informaçoes de vida, nivel e escore
@@ -36,6 +38,7 @@ void inicializa_jogo(Infos *settings)
     settings->num_inimigos_mortos = 0;
 }
 
+/*Dado o som a ser tocado, faz ela começar a tocar.*/
 void BGM(Sound SoundTrack)
 {
     if(!IsSoundPlaying(SoundTrack))    //se não tiver musica ou ela parar
@@ -45,7 +48,7 @@ void BGM(Sound SoundTrack)
     SetSoundVolume(SoundTrack, 0.5);   //ajusta volume da musica
 }
 
-
+/*Inicializa e roda o jogo.*/
 int main()
 {
     SetExitKey(KEY_NULL);       // Disable KEY_ESCAPE to close window, X-button still works
